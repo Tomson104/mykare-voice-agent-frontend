@@ -1,6 +1,6 @@
 'use client';
 
-import { useToolEvents, type ToolEvent } from '@/hooks/useToolEvents';
+import { type ToolEvent, useToolEvents } from '@/hooks/useToolEvents';
 
 /** Friendly labels for each tool. */
 const TOOL_LABELS: Record<string, string> = {
@@ -47,7 +47,7 @@ export function ToolEventsPanel() {
     <div className="pointer-events-auto fixed top-4 right-4 z-50 flex max-h-[90svh] w-80 flex-col gap-3 overflow-y-auto">
       {/* Live tool activity */}
       {events.length > 0 && (
-        <div className="rounded-xl border border-border bg-background/90 p-4 shadow-lg backdrop-blur">
+        <div className="border-border bg-background/90 rounded-xl border p-4 shadow-lg backdrop-blur">
           <h3 className="mb-2 text-sm font-semibold">Agent activity</h3>
           <ul className="flex flex-col gap-1.5">
             {events.map((e, i) => (
@@ -56,7 +56,7 @@ export function ToolEventsPanel() {
                   <StatusIcon status={e.status} />
                 </span>
                 <span className="text-muted-foreground">
-                  <span className="font-medium text-foreground">
+                  <span className="text-foreground font-medium">
                     {TOOL_LABELS[e.tool] ?? e.tool}
                   </span>
                   {e.message ? ` — ${e.message}` : ''}
@@ -69,10 +69,10 @@ export function ToolEventsPanel() {
 
       {/* End-of-call summary */}
       {summary && (
-        <div className="rounded-xl border border-border bg-background/95 p-4 shadow-lg backdrop-blur">
+        <div className="border-border bg-background/95 rounded-xl border p-4 shadow-lg backdrop-blur">
           <h3 className="mb-2 text-sm font-semibold">Call summary</h3>
           {(summary.name || summary.phone) && (
-            <p className="mb-2 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mb-2 text-xs">
               {summary.name ?? 'Caller'}
               {summary.phone ? ` · ${summary.phone}` : ''}
             </p>
@@ -81,7 +81,7 @@ export function ToolEventsPanel() {
 
           {summary.appointments?.length > 0 && (
             <div className="mb-3">
-              <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <h4 className="text-muted-foreground mb-1 text-xs font-semibold tracking-wide uppercase">
                 Appointments
               </h4>
               <ul className="flex flex-col gap-1">
@@ -97,7 +97,7 @@ export function ToolEventsPanel() {
 
           {summary.preferences && summary.preferences.length > 0 && (
             <div className="mb-3">
-              <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <h4 className="text-muted-foreground mb-1 text-xs font-semibold tracking-wide uppercase">
                 Preferences
               </h4>
               <ul className="list-inside list-disc text-sm">
@@ -108,9 +108,7 @@ export function ToolEventsPanel() {
             </div>
           )}
 
-          <p className="text-xs text-muted-foreground">
-            {new Date(summary.ts).toLocaleString()}
-          </p>
+          <p className="text-muted-foreground text-xs">{new Date(summary.ts).toLocaleString()}</p>
         </div>
       )}
     </div>

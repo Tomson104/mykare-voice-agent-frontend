@@ -38,7 +38,12 @@ export function useToolEvents() {
   useEffect(() => {
     if (!room) return;
 
-    const onData = (payload: Uint8Array, _participant?: unknown, _kind?: unknown, topic?: string) => {
+    const onData = (
+      payload: Uint8Array,
+      _participant?: unknown,
+      _kind?: unknown,
+      topic?: string
+    ) => {
       try {
         const msg = JSON.parse(decoder.decode(payload));
         if (topic === 'tool_event' || msg.type === 'tool_event') {
