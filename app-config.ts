@@ -65,7 +65,9 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   // audioVisualizerType: 'aura',
 
   // agent dispatch configuration
-  agentName: process.env.AGENT_NAME ?? undefined,
+  // .trim() guards against stray whitespace/tabs in the env var value, which
+  // would otherwise cause an agent-name mismatch and "agent did not join".
+  agentName: process.env.AGENT_NAME?.trim() || undefined,
 
   // LiveKit Cloud Sandbox configuration
   sandboxId: undefined,
